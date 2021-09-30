@@ -6,10 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
+  <style>
+    .warning {
+      color: aqua;
+    }
+  </style>
   <body>
     <div id="app">
-      {{ num }}
-      <button v-on:click="addNum">dasdsa</button>
+    <p v-bind:class="{ warning: isError }">hello</p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <scrip src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
@@ -17,23 +21,15 @@
       new Vue({
         el: '#app',
         data: {
-          num: 10,
+          //name: "kiki",
+          isError: false,
         },
-        watch: {
-          num: function() {
-            this.logText();
-          }
-        },
-        methods: {
-          addNum: function() {
-            this.num++
-          },
-          logText: function() {
-            console.log('changed');
+        computed: {
+          errorTextColor: function() {
+            return this.isError ? 'warning' : null;
           }
         }
       })
-    
     </script>
   </body>
 </html>
