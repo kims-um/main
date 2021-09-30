@@ -8,34 +8,30 @@
   </head>
   <body>
     <div id="app">
-      <router-view></router-view>
-      <div>
-        <router-link to="/login">login</router-link>
-        <router-link to="/main">main</router-link>
-      </div>
+      <p v-bind:id="adid" class="chacha">{{ num }}</p>
+      <p>{{ numtwo }}</p>
+      <div v-if="loading">Loading</div>
+      <div v-else>test user login</div>
+      <input type="text" v-model="message" />
+      <p>{{ message }}</p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script>
-      let LoginComponent = {
-        template: "<div>login</div>",
-      };
-
-      let MainComponent = {
-        template: "<div>main</div>",
-      };
-
-      let router = new VueRouter({
-        // 페이지 라우팅 정보
-        routes: [
-          { path: "/login", component: LoginComponent },
-          { path: "/main", component: MainComponent },
-        ],
-      });
-
       new Vue({
         el: "#app",
-        router: router,
+        data: {
+          num: 10,
+          adid: "kiki",
+          name: "chacha",
+          loading: true,
+          message: "",
+        },
+        computed: {
+          numtwo: function () {
+            return this.num * 2;
+          },
+        },
       });
     </script>
   </body>
