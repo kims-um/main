@@ -8,31 +8,32 @@
   </head>
   <body>
     <div id="app">
-      <p v-bind:id="adid" class="chacha">{{ num }}</p>
-      <p>{{ numtwo }}</p>
-      <div v-if="loading">Loading</div>
-      <div v-else>test user login</div>
-      <input type="text" v-model="message" />
-      <p>{{ message }}</p>
+      {{ num }}
+      <button v-on:click="addNum">dasdsa</button>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <scrip src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script>
       new Vue({
-        el: "#app",
+        el: '#app',
         data: {
           num: 10,
-          adid: "kiki",
-          name: "chacha",
-          loading: true,
-          message: "",
         },
-        computed: {
-          numtwo: function () {
-            return this.num * 2;
+        watch: {
+          num: function() {
+            this.logText();
+          }
+        },
+        methods: {
+          addNum: function() {
+            this.num++
           },
-        },
-      });
+          logText: function() {
+            console.log('changed');
+          }
+        }
+      })
+    
     </script>
   </body>
 </html>
