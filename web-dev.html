@@ -8,45 +8,34 @@
   </head>
   <body>
     <div id="app">
-      <app-header v-on:pass="logText"></app-header>
-      <app-content v-on:add="plus"></app-content>
+      <router-view></router-view>
+      <div>
+        <router-link to="/login">login</router-link>
+        <router-link to="/main">main</router-link>
+      </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script>
-      let appHeader = {
-        template: '<button v-on:click="passEvent">click me</button>',
-        methods: {
-          passEvent: function () {
-            this.$emit("pass");
-          },
-        },
+      let LoginComponent = {
+        template: "<div>login</div>",
       };
 
-      let appContent = {
-        template: '<button v-on:click="addNum">add</button>',
-        methods: {
-          addNum: function () {
-            this.$emit("add");
-          },
-        },
+      let MainComponent = {
+        template: "<div>main</div>",
       };
+
+      let router = new VueRouter({
+        // 페이지 라우팅 정보
+        routes: [
+          { path: "/login", component: LoginComponent },
+          { path: "/main", component: MainComponent },
+        ],
+      });
+
       new Vue({
         el: "#app",
-        components: {
-          "app-header": appHeader,
-          "app-content": appContent,
-        },
-        methods: {
-          logText: function () {
-            console.log("hello");
-          },
-          plus: function () {
-            this.num++;
-          },
-        },
-        data: {
-          num: 10,
-        },
+        router: router,
       });
     </script>
   </body>
