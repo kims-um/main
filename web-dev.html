@@ -8,28 +8,43 @@
   </head>
   <body>
     <div id="app">
-      <app-header v-bind:propsdata="message"></app-header>
-      <app-content v-bind:Num="num"></app-content>
+      <app-header v-on:pass="logText"></app-header>
+      <app-content v-on:add="plus"></app-content>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
       let appHeader = {
-        template: "<h1>hi</h1>",
-        props: ["propsdata"],
+        template: '<button v-on:click="passEvent">click me</button>',
+        methods: {
+          passEvent: function () {
+            this.$emit("pass");
+          },
+        },
       };
 
       let appContent = {
-        template: "<div>content</div>",
-        props: ["Num"],
+        template: '<button v-on:click="addNum">add</button>',
+        methods: {
+          addNum: function () {
+            this.$emit("add");
+          },
+        },
       };
-      let vm = new Vue({
+      new Vue({
         el: "#app",
         components: {
           "app-header": appHeader,
           "app-content": appContent,
         },
+        methods: {
+          logText: function () {
+            console.log("hello");
+          },
+          plus: function () {
+            this.num++;
+          },
+        },
         data: {
-          message: "hi",
           num: 10,
         },
       });
